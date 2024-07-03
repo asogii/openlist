@@ -135,10 +135,10 @@ func InitConfig() {
 	convertAbsPath(&conf.Conf.BleveDir)
 	convertAbsPath(&conf.Conf.DistDir)
 
-	err := os.MkdirAll(conf.Conf.TempDir, 0o777)
-	if err != nil {
-		log.Fatalf("create temp dir error: %+v", err)
-	}
+	// err = os.MkdirAll(conf.Conf.TempDir, 0o777)
+	// if err != nil {
+	// 	log.Fatalf("create temp dir error: %+v", err)
+	// }
 	log.Debugf("config: %+v", conf.Conf)
 
 	// Validate and display proxy configuration status
