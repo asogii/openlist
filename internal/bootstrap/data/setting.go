@@ -107,8 +107,8 @@ func InitialSettings() []model.SettingItem {
 		{Key: conf.AllowMounted, Value: "true", Type: conf.TypeBool, Group: model.SITE},
 		{Key: conf.RobotsTxt, Value: "User-agent: *\nAllow: /", Type: conf.TypeText, Group: model.SITE},
 		// style settings
-		{Key: conf.Logo, Value: "/images/logo.svg", Type: conf.TypeText, Group: model.STYLE},
-		{Key: conf.Favicon, Value: "/images/logo.svg", Type: conf.TypeString, Group: model.STYLE},
+		{Key: conf.Logo, Value: "images/logo.svg", Type: conf.TypeText, Group: model.STYLE},
+		{Key: conf.Favicon, Value: "images/logo.svg", Type: conf.TypeString, Group: model.STYLE},
 		{Key: conf.MainColor, Value: "#1890ff", Type: conf.TypeString, Group: model.STYLE},
 		{Key: "home_icon", Value: "🏠", Type: conf.TypeString, Group: model.STYLE},
 		{Key: "share_icon", Value: "🎁", Type: conf.TypeString, Group: model.STYLE},
@@ -145,11 +145,7 @@ func InitialSettings() []model.SettingItem {
 		//		{Key: conf.PdfViewers, Value: `{
 		//	"pdf.js":"https://openlistteam.github.io/pdf.js/web/viewer.html?file=$url"
 		//}`, Type: conf.TypeText, Group: model.PREVIEW},
-<<<<<<< HEAD
-		{Key: "audio_cover", Value: "https://res.oplist.org/logo/logo.svg", MigrationValue: "https://cdn.oplist.org/gh/OpenListTeam/Logo@main/logo.svg", Type: conf.TypeString, Group: model.PREVIEW},
-=======
 		{Key: "audio_cover", Value: "/images/logo.svg", Type: conf.TypeString, Group: model.PREVIEW},
->>>>>>> 01536efe (default local logo)
 		{Key: conf.AudioAutoplay, Value: "true", Type: conf.TypeBool, Group: model.PREVIEW},
 		{Key: conf.VideoAutoplay, Value: "true", Type: conf.TypeBool, Group: model.PREVIEW},
 		{Key: conf.PreviewDownloadByDefault, Value: "false", Type: conf.TypeBool, Group: model.PREVIEW},
