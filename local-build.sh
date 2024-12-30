@@ -17,7 +17,8 @@ builtAt="$(date +'%F %T %z')"
 goVersion=$(go version | sed 's/go version //')
 gitAuthor=$(git show -s --format='format:%aN <%ae>' HEAD)
 gitCommit=$(git log --pretty=format:"%h" -1)
-version=$(git describe --long --tags --dirty --always)
+#version=$(git describe --long --tags --dirty --always)
+version="asogii-$(git log -1 --pretty=format:%h)"
 webVersion=$(wget -qO- -t1 -T2 "https://api.github.com/repos/alist-org/alist-web/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
 ldflags="\
 -w -s \
