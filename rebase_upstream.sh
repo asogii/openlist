@@ -2,6 +2,7 @@
 
 git fetch alist --tags
 git checkout main
-#change tag to newest
-git rebase tags/v3.45.0
+#git rebase tags/v3.45.0
+git describe --tags `git rev-list --tags --max-count=1` > upstream_version
+git rebase tags/$(cat upstream_version)
 
