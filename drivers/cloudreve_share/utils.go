@@ -2,8 +2,9 @@ package cloudreve_share
 
 import (
 	"errors"
-	"github.com/alist-org/alist/v3/drivers/base"
-	"github.com/alist-org/alist/v3/pkg/cookie"
+
+	"github.com/OpenListTeam/OpenList/v4/drivers/base"
+	"github.com/OpenListTeam/OpenList/v4/pkg/cookie"
 	json "github.com/json-iterator/go"
 )
 
