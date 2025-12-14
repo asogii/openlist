@@ -32,4 +32,4 @@ ldflags="\
 "
 go build -ldflags="$ldflags" -x .
 
-mv openlist build/.
+mv OpenList build/openlist
