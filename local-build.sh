@@ -1,10 +1,11 @@
 #!/bin/bash
 
-mkdir build
+mkdir -p build
 cd build
 
-curl -L https://github.com/OpenListTeam/OpenList-Frontend/releases/latest/download/openlist-frontend-dist-$(cat upstream_version).tar.gz -o dist.tar.gz
-tar -zxvf dist.tar.gz
+curl -L https://github.com/OpenListTeam/OpenList-Frontend/releases/latest/download/openlist-frontend-dist-$(cat ../upstream_version).tar.gz -o dist.tar.gz
+mkdir -p dist
+tar -zxvf dist.tar.gz -C dist
 curl -L https://cdn.oplist.org/gh/OpenListTeam/Logo@main/logo.svg -o dist/images/logo.svg
 rm -rf ../public/dist
 mv -f dist ../public
