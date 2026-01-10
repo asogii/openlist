@@ -1,0 +1,40 @@
+#!/bin/bash
+
+git fetch openlist --tags
+upstream_version=$(git describe --tags --abbrev=0 --match="v[0-9]*")
+
+mkdir -p build
+cd build
+
+curl -L https://github.com/OpenListTeam/OpenList-Frontend/releases/latest/download/openlist-frontend-dist-$upstream_version.tar.gz -o dist.tar.gz
+mkdir -p dist/images
+tar -zxvf dist.tar.gz -C dist
+curl -L https://cdn.oplist.org/gh/OpenListTeam/Logo@main/logo.svg -o dist/images/logo.svg
+rm -rf ../public/dist
+mv -f dist ../public
+rm -rf dist.tar.gz
+
+cd ..
+
+appName="openlist"
+builtAt="$(date +'%F %T %z')"
+goVersion=$(go version | sed 's/go version //')
+gitAuthor=$(git show -s --format='format:%aN <%ae>' HEAD)
+gitCommit=$(git log --pretty=format:"%h" -1)
+version="$upstream_version-asogii-$(git log -1 --pretty=format:%h)"
+webVersion=$(wget -qO- -t1 -T2 "https://api.github.com/repos/OpenListTeam/OpenList-Frontend/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
+ldflags="\
+-w -s \
+-X 'github.com/OpenListTeam/OpenList/v4/internal/conf.BuiltAt=$builtAt' \
+-X 'github.com/OpenListTeam/OpenList/v4/internal/conf.GoVersion=$goVersion' \
+-X 'github.com/OpenListTeam/OpenList/v4/internal/conf.GitAuthor=$gitAuthor' \
+-X 'github.com/OpenListTeam/OpenList/v4/internal/conf.GitCommit=$gitCommit' \
+-X 'github.com/OpenListTeam/OpenList/v4/internal/conf.Version=$version' \
+-X 'github.com/OpenListTeam/OpenList/v4/internal/conf.WebVersion=$webVersion' \
+"
+
+CC=$([[ $(uname -m) == "aarch64" ]] && echo "gcc" || echo "aarch64-linux-gnu-gcc")
+
+CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC=$CC \
+go build -tags "netgo sqlite_omit_load_extension" -ldflags="$ldflags" -o build/openlist-arm64
+
